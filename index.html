@@ -1,335 +1,335 @@
-1|<!DOCTYPE html>
-     2|<html lang="zh-CN">
-     3|<head>
-     4|<meta charset="UTF-8">
-     5|<meta name="viewport" content="width=device-width, initial-scale=1.0">
-     6|<meta name="description" content="老姚的博客 — 思考 · 记录 · 分享">
-     7|<title>老姚的博客</title>
-     8|<style>
-     9|  /* ===== Reset & Variables ===== */
-    10|  :root {
-    11|    --bg: #ffffff;
-    12|    --bg-card: #fafafa;
-    13|    --bg-card-hover: #f3f3f3;
-    14|    --border: #e8e8e8;
-    15|    --border-hover: #d4d4d4;
-    16|    --text: #444444;
-    17|    --text-heading: #111111;
-    18|    --text-muted: #888888;
-    19|    --accent: #e8960a;
-    20|    --accent-glow: rgba(232, 150, 10, 0.08);
-    21|    --tag-bg: #f0f0f0;
-    22|    --tag-text: #777777;
-    23|    --radius: 10px;
-    24|  }
-    25|
-    26|  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    27|
-    28|  html { scroll-behavior: smooth; }
-    29|
-    30|  body {
-    31|    background: var(--bg);
-    32|    color: var(--text);
-    33|    font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-    34|    line-height: 1.7;
-    35|    min-height: 100vh;
-    36|    -webkit-font-smoothing: antialiased;
-    37|  }
-    38|
-    39|  /* ===== Layout ===== */
-    40|  .container {
-    41|    max-width: 680px;
-    42|    margin: 0 auto;
-    43|    padding: 0 24px;
-    44|  }
-    45|
-    46|  /* ===== Navigation ===== */
-    47|  .nav {
-    48|    display: flex;
-    49|    justify-content: space-between;
-    50|    align-items: center;
-    51|    padding: 20px 0;
-    52|    border-bottom: 1px solid var(--border);
-    53|    margin-bottom: 48px;
-    54|  }
-    55|
-    56|  .nav-logo {
-    57|    font-size: 1.1rem;
-    58|    font-weight: 700;
-    59|    color: var(--text-heading);
-    60|    text-decoration: none;
-    61|    letter-spacing: -0.01em;
-    62|  }
-    63|
-    64|  .nav-links {
-    65|    display: flex;
-    66|    gap: 24px;
-    67|    list-style: none;
-    68|  }
-    69|
-    70|  .nav-links a {
-    71|    color: var(--text-muted);
-    72|    text-decoration: none;
-    73|    font-size: 0.9rem;
-    74|    font-weight: 500;
-    75|    transition: color 0.15s;
-    76|    padding: 4px 0;
-    77|    border-bottom: 2px solid transparent;
-    78|  }
-    79|
-    80|  .nav-links a:hover,
-    81|  .nav-links a.active {
-    82|    color: var(--text-heading);
-    83|    border-bottom-color: var(--accent);
-    84|  }
-    85|
-    86|  /* ===== Hero ===== */
-    87|  .hero {
-    88|    margin-bottom: 56px;
-    89|  }
-    90|
-    91|  .hero h1 {
-    92|    font-size: 2.4rem;
-    93|    font-weight: 800;
-    94|    color: var(--text-heading);
-    95|    letter-spacing: -0.03em;
-    96|    margin-bottom: 12px;
-    97|  }
-    98|
-    99|  .hero .highlight {
-   100|    background: linear-gradient(135deg, var(--accent), #fbbf24);
-   101|    -webkit-background-clip: text;
-   102|    -webkit-text-fill-color: transparent;
-   103|    background-clip: text;
-   104|  }
-   105|
-   106|  .hero p {
-   107|    font-size: 1.05rem;
-   108|    color: var(--text-muted);
-   109|    max-width: 520px;
-   110|    line-height: 1.7;
-   111|  }
-   112|
-   113|  /* ===== Section Header ===== */
-   114|  .section-header {
-   115|    display: flex;
-   116|    align-items: baseline;
-   117|    gap: 12px;
-   118|    margin-bottom: 28px;
-   119|  }
-   120|
-   121|  .section-header h2 {
-   122|    font-size: 0.8rem;
-   123|    font-weight: 700;
-   124|    text-transform: uppercase;
-   125|    letter-spacing: 0.08em;
-   126|    color: var(--text-muted);
-   127|  }
-   128|
-   129|  .section-line {
-   130|    flex: 1;
-   131|    height: 1px;
-   132|    background: var(--border);
-   133|  }
-   134|
-   135|  /* ===== Post Cards ===== */
-   136|  .posts {
-   137|    display: flex;
-   138|    flex-direction: column;
-   139|    gap: 1px;
-   140|    background: var(--border);
-   141|    border-radius: var(--radius);
-   142|    overflow: hidden;
-   143|    margin-bottom: 56px;
-   144|  }
-   145|
-   146|  .post {
-   147|    background: var(--bg-card);
-   148|    padding: 24px 28px;
-   149|    display: flex;
-   150|    gap: 20px;
-   151|    transition: background 0.2s, transform 0.2s;
-   152|    position: relative;
-   153|    text-decoration: none;
-   154|    color: inherit;
-   155|  }
-   156|
-   157|  .post:hover {
-   158|    background: var(--bg-card-hover);
-   159|  }
-   160|
-   161|  .post-date {
-   162|    flex-shrink: 0;
-   163|    width: 80px;
-   164|    font-size: 0.8rem;
-   165|    color: var(--text-muted);
-   166|    padding-top: 3px;
-   167|    font-variant-numeric: tabular-nums;
-   168|  }
-   169|
-   170|  .post-body {
-   171|    flex: 1;
-   172|    min-width: 0;
-   173|  }
-   174|
-   175|  .post-title {
-   176|    font-size: 1.15rem;
-   177|    font-weight: 700;
-   178|    color: var(--text-heading);
-   179|    margin-bottom: 6px;
-   180|    line-height: 1.4;
-   181|    transition: color 0.15s;
-   182|  }
-   183|
-   184|  .post:hover .post-title {
-   185|    color: var(--accent);
-   186|  }
-   187|
-   188|  .post-excerpt {
-   189|    font-size: 0.9rem;
-   190|    color: var(--text-muted);
-   191|    line-height: 1.6;
-   192|    margin-bottom: 12px;
-   193|    display: -webkit-box;
-   194|    -webkit-line-clamp: 2;
-   195|    -webkit-box-orient: vertical;
-   196|    overflow: hidden;
-   197|  }
-   198|
-   199|  .post-meta {
-   200|    display: flex;
-   201|    align-items: center;
-   202|    gap: 12px;
-   203|    flex-wrap: wrap;
-   204|  }
-   205|
-   206|  .post-tags {
-   207|    display: flex;
-   208|    gap: 6px;
-   209|    flex-wrap: wrap;
-   210|  }
-   211|
-   212|  .tag {
-   213|    font-size: 0.72rem;
-   214|    font-weight: 500;
-   215|    padding: 2px 8px;
-   216|    border-radius: 4px;
-   217|    background: var(--tag-bg);
-   218|    color: var(--tag-text);
-   219|    white-space: nowrap;
-   220|  }
-   221|
-   222|  .post-time {
-   223|    font-size: 0.75rem;
-   224|    color: var(--text-muted);
-   225|    white-space: nowrap;
-   226|  }
-   227|
-   228|  .post-time::before {
-   229|    content: "· ";
-   230|  }
-   231|
-   232|  /* ===== Footer ===== */
-   233|  .footer {
-   234|    border-top: 1px solid var(--border);
-   235|    padding: 32px 0 48px;
-   236|    display: flex;
-   237|    justify-content: space-between;
-   238|    align-items: center;
-   239|    flex-wrap: wrap;
-   240|    gap: 16px;
-   241|    color: var(--text-muted);
-   242|    font-size: 0.82rem;
-   243|  }
-   244|
-   245|  .footer-links {
-   246|    display: flex;
-   247|    gap: 20px;
-   248|    list-style: none;
-   249|  }
-   250|
-   251|  .footer-links a {
-   252|    color: var(--text-muted);
-   253|    text-decoration: none;
-   254|    transition: color 0.15s;
-   255|  }
-   256|
-   257|  .footer-links a:hover {
-   258|    color: var(--text-heading);
-   259|  }
-   260|
-   261|  /* ===== About Section ===== */
-   262|  .about {
-   263|    margin-bottom: 56px;
-   264|  }
-   265|
-   266|  .about-card {
-   267|    background: var(--bg-card);
-   268|    border: 1px solid var(--border);
-   269|    border-radius: var(--radius);
-   270|    padding: 28px;
-   271|  }
-   272|
-   273|  .about-intro {
-   274|    font-size: 1.2rem;
-   275|    font-weight: 600;
-   276|    color: var(--text-heading);
-   277|    margin-bottom: 12px;
-   278|  }
-   279|
-   280|  .about-detail {
-   281|    font-size: 0.92rem;
-   282|    color: var(--text-muted);
-   283|    line-height: 1.7;
-   284|    margin-bottom: 8px;
-   285|  }
-   286|
-   287|  .about-detail a {
-   288|    color: var(--accent);
-   289|    text-decoration: none;
-   290|    font-weight: 500;
-   291|  }
-   292|
-   293|  .about-detail a:hover {
-   294|    text-decoration: underline;
-   295|  }
-   296|
-   297|  /* ===== Responsive ===== */
-   298|  @media (max-width: 640px) {
-   299|    .hero h1 { font-size: 1.7rem; }
-   300|    .post { padding: 18px 20px; flex-direction: column; gap: 6px; }
-   301|    .post-date { width: auto; }
-   302|    .nav { padding: 16px 0; margin-bottom: 32px; }
-   303|    .hero { margin-bottom: 40px; }
-   304|  }
-   305|</style>
-   306|</head>
-   307|<body>
-   308|
-   309|<div class="container">
-   310|
-   311|  <!-- Navigation -->
-   312|  <nav class="nav">
-   313|    <a href="/" class="nav-logo">老姚</a>
-   314|    <ul class="nav-links">
-   315|      <li><a href="/" class="active">博客</a></li>
-   316|      <li><a href="#about">关于</a></li>
-   317|    </ul>
-   318|  </nav>
-   319|
-   320|  <!-- Hero -->
-   321|  <section class="hero">
-   322|    <h1>思考<span class="highlight">·</span>记录<span class="highlight">·</span>分享</h1>
-   323|    <p>一个教育者的技术笔记。关注 AI 教学、动画制作、编程工具，用技术让学习更生动。</p>
-   324|  </section>
-   325|
-   326|  <!-- Posts Section -->
-   327|  <div class="section-header">
-   328|    <h2>文章</h2>
-   329|    <div class="section-line"></div>
-   330|  </div>
-   331|
-   332|  <div class="posts">
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="老姚的博客 — 思考 · 记录 · 分享">
+<title>老姚的博客</title>
+<style>
+  /* ===== Reset & Variables ===== */
+  :root {
+    --bg: #ffffff;
+    --bg-card: #fafafa;
+    --bg-card-hover: #f3f3f3;
+    --border: #e8e8e8;
+    --border-hover: #d4d4d4;
+    --text: #444444;
+    --text-heading: #111111;
+    --text-muted: #888888;
+    --accent: #e8960a;
+    --accent-glow: rgba(232, 150, 10, 0.08);
+    --tag-bg: #f0f0f0;
+    --tag-text: #777777;
+    --radius: 10px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.7;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== Layout ===== */
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ===== Navigation ===== */
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
+  }
+
+  .nav-logo {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.15s;
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--text-heading);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    margin-bottom: 56px;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--text-heading);
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+  }
+
+  .hero .highlight {
+    background: linear-gradient(135deg, var(--accent), #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  /* ===== Section Header ===== */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .section-header h2 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ===== Post Cards ===== */
+  .posts {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 56px;
+  }
+
+  .post {
+    background: var(--bg-card);
+    padding: 24px 28px;
+    display: flex;
+    gap: 20px;
+    transition: background 0.2s, transform 0.2s;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post:hover {
+    background: var(--bg-card-hover);
+  }
+
+  .post-date {
+    flex-shrink: 0;
+    width: 80px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    padding-top: 3px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .post-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .post-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    margin-bottom: 6px;
+    line-height: 1.4;
+    transition: color 0.15s;
+  }
+
+  .post:hover .post-title {
+    color: var(--accent);
+  }
+
+  .post-excerpt {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .post-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    white-space: nowrap;
+  }
+
+  .post-time {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .post-time::before {
+    content: "· ";
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-links a:hover {
+    color: var(--text-heading);
+  }
+
+  /* ===== About Section ===== */
+  .about {
+    margin-bottom: 56px;
+  }
+
+  .about-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+
+  .about-intro {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-heading);
+    margin-bottom: 12px;
+  }
+
+  .about-detail {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+
+  .about-detail a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .about-detail a:hover {
+    text-decoration: underline;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.7rem; }
+    .post { padding: 18px 20px; flex-direction: column; gap: 6px; }
+    .post-date { width: auto; }
+    .nav { padding: 16px 0; margin-bottom: 32px; }
+    .hero { margin-bottom: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="/" class="nav-logo">老姚</a>
+    <ul class="nav-links">
+      <li><a href="/" class="active">博客</a></li>
+      <li><a href="#about">关于</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>思考<span class="highlight">·</span>记录<span class="highlight">·</span>分享</h1>
+    <p>一个教育者的技术笔记。关注 AI 教学、动画制作、编程工具，用技术让学习更生动。</p>
+  </section>
+
+  <!-- Posts Section -->
+  <div class="section-header">
+    <h2>文章</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="posts">
 
     <a href="posts/ai-cto-guide.html" class="post">
       <span class="post-date">2026.06.24</span>
@@ -351,30 +351,29 @@
   </div>
 
   <!-- About Section -->
-   422|  <section class="about" id="about">
-   423|    <div class="section-header">
-   424|      <h2>关于</h2>
-   425|      <div class="section-line"></div>
-   426|    </div>
-   427|    <div class="about-card">
-   428|      <p class="about-intro">我是老姚，<strong>AI 时代的编程者</strong>。</p>
-   429|      <p class="about-detail">关注大模型应用、AI 辅助编程与教育技术。用代码和创意探索智能时代的无限可能。</p>
-   430|      <p class="about-detail">
-   431|        GitHub：<a href="https://github.com/qdlaoyao-design">@qdlaoyao-design</a>
-   432|      </p>
-   433|    </div>
-   434|  </section>
-   435|
-   436|  <!-- Footer -->
-   437|  <footer class="footer">
-   438|    <span>© 2026 老姚</span>
-   439|    <ul class="footer-links">
-   440|      <li><a href="https://github.com/qdlaoyao-design">GitHub</a></li>
-   441|    </ul>
-   442|  </footer>
-   443|
-   444|</div>
-   445|
-   446|</body>
-   447|</html>
-   448|
+  <section class="about" id="about">
+    <div class="section-header">
+      <h2>关于</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-card">
+      <p class="about-intro">我是老姚，<strong>AI 时代的编程者</strong>。</p>
+      <p class="about-detail">关注大模型应用、AI 辅助编程与教育技术。用代码和创意探索智能时代的无限可能。</p>
+      <p class="about-detail">
+        GitHub：<a href="https://github.com/qdlaoyao-design">@qdlaoyao-design</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <span>© 2026 老姚</span>
+    <ul class="footer-links">
+      <li><a href="https://github.com/qdlaoyao-design">GitHub</a></li>
+    </ul>
+  </footer>
+
+</div>
+
+</body>
+</html>
