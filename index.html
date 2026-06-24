@@ -3,193 +3,396 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="老姚的博客 — 思考 · 记录 · 分享">
 <title>老姚的博客</title>
 <style>
+  /* ===== Reset & Variables ===== */
   :root {
-    --bg: #0d1117;
-    --bg-card: #161b22;
-    --border: #30363d;
-    --text: #c9d1d9;
-    --text-muted: #8b949e;
-    --accent: #58a6ff;
-    --accent-hover: #79c0ff;
-    --tag-bg: #1f2937;
-    --tag-text: #9ca3af;
+    --bg: #0a0a0c;
+    --bg-card: #111114;
+    --bg-card-hover: #16161a;
+    --border: #222226;
+    --border-hover: #333338;
+    --text: #d4d4d8;
+    --text-heading: #fafafa;
+    --text-muted: #71717a;
+    --accent: #f59e0b;
+    --accent-glow: rgba(245, 158, 11, 0.15);
+    --tag-bg: #1c1c20;
+    --tag-text: #a1a1aa;
+    --radius: 10px;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  html { scroll-behavior: smooth; }
+
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+    font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
     line-height: 1.7;
     min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
   }
 
+  /* ===== Layout ===== */
   .container {
-    max-width: 720px;
+    max-width: 680px;
     margin: 0 auto;
     padding: 0 24px;
   }
 
-  /* ── Header ── */
-  header {
-    padding: 64px 0 48px;
-    text-align: center;
+  /* ===== Navigation ===== */
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 48px;
   }
 
-  header h1 {
-    font-size: 2rem;
+  .nav-logo {
+    font-size: 1.1rem;
     font-weight: 700;
-    letter-spacing: -0.02em;
-    color: #f0f6fc;
-    margin-bottom: 8px;
-  }
-
-  header .subtitle {
-    font-size: 0.95rem;
-    color: var(--text-muted);
-    font-weight: 400;
-  }
-
-  /* ── Post Card ── */
-  .post {
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 24px;
-    margin-bottom: 16px;
-    transition: border-color 0.2s;
-  }
-
-  .post:hover {
-    border-color: #58a6ff55;
-  }
-
-  .post-date {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-bottom: 6px;
-  }
-
-  .post h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-
-  .post h2 a {
-    color: var(--accent);
+    color: var(--text-heading);
     text-decoration: none;
+    letter-spacing: -0.01em;
   }
 
-  .post h2 a:hover {
-    color: var(--accent-hover);
-    text-decoration: underline;
+  .nav-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
   }
 
-  .post p {
+  .nav-links a {
     color: var(--text-muted);
-    font-size: 0.92rem;
-    line-height: 1.65;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.15s;
+    padding: 4px 0;
+    border-bottom: 2px solid transparent;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--text-heading);
+    border-bottom-color: var(--accent);
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    margin-bottom: 56px;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: var(--text-heading);
+    letter-spacing: -0.03em;
     margin-bottom: 12px;
   }
 
-  .tags {
+  .hero .highlight {
+    background: linear-gradient(135deg, var(--accent), #fbbf24);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  /* ===== Section Header ===== */
+  .section-header {
     display: flex;
-    gap: 8px;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .section-header h2 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ===== Post Cards ===== */
+  .posts {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 56px;
+  }
+
+  .post {
+    background: var(--bg-card);
+    padding: 24px 28px;
+    display: flex;
+    gap: 20px;
+    transition: background 0.2s, transform 0.2s;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .post:hover {
+    background: var(--bg-card-hover);
+  }
+
+  .post-date {
+    flex-shrink: 0;
+    width: 80px;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    padding-top: 3px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .post-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .post-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-heading);
+    margin-bottom: 6px;
+    line-height: 1.4;
+    transition: color 0.15s;
+  }
+
+  .post:hover .post-title {
+    color: var(--accent);
+  }
+
+  .post-excerpt {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 12px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .post-tags {
+    display: flex;
+    gap: 6px;
     flex-wrap: wrap;
   }
 
   .tag {
-    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 4px;
     background: var(--tag-bg);
     color: var(--tag-text);
-    font-size: 0.75rem;
-    padding: 3px 10px;
-    border-radius: 12px;
-    text-decoration: none;
-    transition: background 0.15s;
+    white-space: nowrap;
   }
 
-  .tag:hover { background: #374151; }
+  .post-time {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
 
-  /* ── Footer ── */
-  footer {
-    text-align: center;
-    padding: 48px 0;
+  .post-time::before {
+    content: "· ";
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 0 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
     color: var(--text-muted);
     font-size: 0.82rem;
-    border-top: 1px solid var(--border);
-    margin-top: 32px;
   }
 
-  footer a {
-    color: var(--accent);
+  .footer-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    color: var(--text-muted);
     text-decoration: none;
+    transition: color 0.15s;
   }
 
-  /* ── Responsive ── */
+  .footer-links a:hover {
+    color: var(--text-heading);
+  }
+
+  /* ===== Responsive ===== */
   @media (max-width: 640px) {
-    header { padding: 40px 0 32px; }
-    header h1 { font-size: 1.5rem; }
-    .post { padding: 18px; }
-    .post h2 { font-size: 1.1rem; }
+    .hero h1 { font-size: 1.7rem; }
+    .post { padding: 18px 20px; flex-direction: column; gap: 6px; }
+    .post-date { width: auto; }
+    .nav { padding: 16px 0; margin-bottom: 32px; }
+    .hero { margin-bottom: 40px; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="container">
-    <h1>老姚的博客</h1>
-    <p class="subtitle">思考 · 记录 · 分享</p>
+<div class="container">
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="/" class="nav-logo">老姚</a>
+    <ul class="nav-links">
+      <li><a href="/" class="active">博客</a></li>
+      <li><a href="#about">关于</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>思考<span class="highlight">·</span>记录<span class="highlight">·</span>分享</h1>
+    <p>一个教育者的技术笔记。关注 AI 教学、动画制作、编程工具，用技术让学习更生动。</p>
+  </section>
+
+  <!-- Posts Section -->
+  <div class="section-header">
+    <h2>文章</h2>
+    <div class="section-line"></div>
   </div>
-</header>
 
-<main class="container">
+  <div class="posts">
 
-  <article class="post">
-    <div class="post-date">2026-06-24</div>
-    <h2><a href="#">从零搭建 GitHub Pages 博客</a></h2>
-    <p>极简暗色主题，纯 HTML/CSS，一行 JavaScript 都不用。从创建仓库到部署上线，十分钟搞定。</p>
-    <div class="tags">
-      <a class="tag" href="#">GitHub Pages</a>
-      <a class="tag" href="#">HTML/CSS</a>
-      <a class="tag" href="#">博客</a>
-    </div>
-  </article>
+    <!-- Post 1 -->
+    <a href="#" class="post">
+      <span class="post-date">2026.06.24</span>
+      <div class="post-body">
+        <div class="post-title">从零搭建 GitHub Pages 博客</div>
+        <p class="post-excerpt">极简暗色主题，纯 HTML/CSS，一行 JavaScript 都不用。从创建仓库到部署上线，十分钟搞定。</p>
+        <div class="post-meta">
+          <span class="post-tags">
+            <span class="tag">GitHub Pages</span>
+            <span class="tag">HTML/CSS</span>
+            <span class="tag">教程</span>
+          </span>
+          <span class="post-time">3 分钟阅读</span>
+        </div>
+      </div>
+    </a>
 
-  <article class="post">
-    <div class="post-date">2026-06-23</div>
-    <h2><a href="#">AI 教学视频的制作思路</a></h2>
-    <p>用大模型生成内容、画面、视频，打造初中语文阅读理解的 PPT 风格教学视频。全流程自动化管线探索。</p>
-    <div class="tags">
-      <a class="tag" href="#">AI</a>
-      <a class="tag" href="#">教育</a>
-      <a class="tag" href="#">视频制作</a>
-    </div>
-  </article>
+    <!-- Post 2 -->
+    <a href="#" class="post">
+      <span class="post-date">2026.06.23</span>
+      <div class="post-body">
+        <div class="post-title">AI 教学视频制作全流程</div>
+        <p class="post-excerpt">用大模型生成内容、画面和视频，打造初中语文阅读理解的 PPT 风格教学视频。端到端自动化管线探索。</p>
+        <div class="post-meta">
+          <span class="post-tags">
+            <span class="tag">AI</span>
+            <span class="tag">教育</span>
+            <span class="tag">视频制作</span>
+          </span>
+          <span class="post-time">6 分钟阅读</span>
+        </div>
+      </div>
+    </a>
 
-  <article class="post">
-    <div class="post-date">2026-06-22</div>
-    <h2><a href="#">Manim 动画入门笔记</a></h2>
-    <p>3Blue1Brown 同款数学动画引擎，用 Python 代码生成精美动画。环境搭建与第一个场景。</p>
-    <div class="tags">
-      <a class="tag" href="#">Manim</a>
-      <a class="tag" href="#">Python</a>
-      <a class="tag" href="#">动画</a>
-    </div>
-  </article>
+    <!-- Post 3 -->
+    <a href="#" class="post">
+      <span class="post-date">2026.06.22</span>
+      <div class="post-body">
+        <div class="post-title">Manim 动画入门笔记</div>
+        <p class="post-excerpt">3Blue1Brown 同款数学动画引擎，用 Python 代码生成精美动画。环境搭建、核心概念与第一个场景。</p>
+        <div class="post-meta">
+          <span class="post-tags">
+            <span class="tag">Manim</span>
+            <span class="tag">Python</span>
+            <span class="tag">动画</span>
+          </span>
+          <span class="post-time">8 分钟阅读</span>
+        </div>
+      </div>
+    </a>
 
-</main>
+    <!-- Post 4 -->
+    <a href="#" class="post">
+      <span class="post-date">2026.06.20</span>
+      <div class="post-body">
+        <div class="post-title">Prompt Engineering 实践指南</div>
+        <p class="post-excerpt">从角色设定到思维链，系统梳理提示词工程的核心技巧。附 20 个实战场景的 Prompt 模板。</p>
+        <div class="post-meta">
+          <span class="post-tags">
+            <span class="tag">Prompt</span>
+            <span class="tag">大模型</span>
+            <span class="tag">技巧</span>
+          </span>
+          <span class="post-time">10 分钟阅读</span>
+        </div>
+      </div>
+    </a>
 
-<footer>
-  <div class="container">
-    <p>© 2026 老姚 · Powered by <a href="https://pages.github.com">GitHub Pages</a></p>
+    <!-- Post 5 -->
+    <a href="#" class="post">
+      <span class="post-date">2026.06.18</span>
+      <div class="post-body">
+        <div class="post-title">Claude Code 开发记：Web 计算器</div>
+        <p class="post-excerpt">用 Claude Code 从零开发一个暗色玻璃拟态 Web 计算器。AI 辅助编程的真实体验与踩坑记录。</p>
+        <div class="post-meta">
+          <span class="post-tags">
+            <span class="tag">Claude Code</span>
+            <span class="tag">AI 编程</span>
+            <span class="tag">实战</span>
+          </span>
+          <span class="post-time">5 分钟阅读</span>
+        </div>
+      </div>
+    </a>
+
   </div>
-</footer>
+
+  <!-- Footer -->
+  <footer class="footer" id="about">
+    <span>© 2026 老姚</span>
+    <ul class="footer-links">
+      <li><a href="https://github.com/qdlaoyao-design">GitHub</a></li>
+      <li><a href="#">RSS</a></li>
+      <li><a href="mailto:qdlaoyao@126.com">邮件</a></li>
+    </ul>
+  </footer>
+
+</div>
 
 </body>
 </html>
