@@ -258,6 +258,42 @@
     color: var(--text-heading);
   }
 
+  /* ===== About Section ===== */
+  .about {
+    margin-bottom: 56px;
+  }
+
+  .about-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+  }
+
+  .about-intro {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-heading);
+    margin-bottom: 12px;
+  }
+
+  .about-detail {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+
+  .about-detail a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .about-detail a:hover {
+    text-decoration: underline;
+  }
+
   /* ===== Responsive ===== */
   @media (max-width: 640px) {
     .hero h1 { font-size: 1.7rem; }
@@ -382,13 +418,26 @@
 
   </div>
 
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="section-header">
+      <h2>关于</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="about-card">
+      <p class="about-intro">我是老姚，<strong>AI 时代的编程者</strong>。</p>
+      <p class="about-detail">关注大模型应用、AI 辅助编程与教育技术。用代码和创意探索智能时代的无限可能。</p>
+      <p class="about-detail">
+        GitHub：<a href="https://github.com/qdlaoyao-design">@qdlaoyao-design</a>
+      </p>
+    </div>
+  </section>
+
   <!-- Footer -->
-  <footer class="footer" id="about">
+  <footer class="footer">
     <span>© 2026 老姚</span>
     <ul class="footer-links">
       <li><a href="https://github.com/qdlaoyao-design">GitHub</a></li>
-      <li><a href="#">RSS</a></li>
-      <li><a href="mailto:qdlaoyao@126.com">邮件</a></li>
     </ul>
   </footer>
 
